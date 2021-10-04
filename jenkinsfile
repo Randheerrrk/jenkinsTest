@@ -9,6 +9,7 @@ pipeline{
         stage("Deliver"){
             steps{
                 sh "sh ./scripts/run.sh"
+                sh "echo 'added auto trigger'"
             }
         }
     }
