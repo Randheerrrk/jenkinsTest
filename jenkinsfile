@@ -4,6 +4,7 @@ pipeline{
         stage("Build"){
             steps{
                 sh "sh ./scripts/build.sh"
+                sh "echo 'this is on dev branch'"
             }
         }
         stage("Deliver"){
