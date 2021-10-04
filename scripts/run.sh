@@ -1,5 +1,5 @@
 echo "starting server"
 set -x
-docker run -d -p 3000:3000 expressapp
-set +x
+docker run -d -p 3001:3000 expressapp
+set +xs
 echo "started"
