@@ -1,15 +1,8 @@
 pipeline{
     agent any
-    stages{
-        stage("Build"){
-            when{
-                not branch "master"
-                allOf {
-                    expression {
-                        return currentBuild() == 4
-                    }
-                    environment ignoreCase: true, name: 'branch', value: 'dev'
-                }
+    stages {
+        stage("Build"){ 
+            when {
                 anyOf {
                     branch "master";
                     branch "dev"
