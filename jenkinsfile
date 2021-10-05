@@ -1,6 +1,17 @@
 pipeline{
     agent any
     stages{
+        when{
+            not branch "master"
+            allOf {
+                equals equals expected: 4, actual: currentBuild.number;
+                equals expected: 2, actual: 2
+            }
+            anyOf {
+                branch "master";
+                branch "dev"
+            }
+        }
         stage("Build"){
             steps{
                 sh "sh ./scripts/build.sh"
