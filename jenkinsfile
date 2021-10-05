@@ -5,7 +5,7 @@ pipeline{
             when {
                 allOf {
                     expression {
-                        return currentBuild() == 4
+                        return env.BUILD_NUMBER == 4
                     }
                     environment ignoreCase: true, name: 'branch', value: 'dev'
                 }
