@@ -1,18 +1,20 @@
 pipeline{
     agent any
     stages{
-        when{
-            not branch "master"
-            allOf {
-                equals equals expected: 4, actual: currentBuild.number;
-                equals expected: 2, actual: 2
-            }
-            anyOf {
-                branch "master";
-                branch "dev"
-            }
-        }
         stage("Build"){
+            when{
+                not branch "master"
+                allOf {
+                    expression {
+                        return currentBuild() == 4
+                    }
+                    environment ignoreCase: true, name: 'branch', value: 'dev'
+                }
+                anyOf {
+                    branch "master";
+                    branch "dev"
+                }
+            }
             steps{
                 sh "sh ./scripts/build.sh"
                 sh "echo 'this is on dev branch'"
