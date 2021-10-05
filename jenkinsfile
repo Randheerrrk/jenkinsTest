@@ -17,6 +17,9 @@ pipeline{
             }
         }
         stage("Deliver"){
+            when {
+                not branch "master"
+            }
             steps{
                 sh "echo ${env.BUILD_NUMBER}"
                 sh "sh ./scripts/run.sh"
