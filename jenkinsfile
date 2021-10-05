@@ -5,7 +5,7 @@ pipeline{
             when {
                 allOf {
                     expression {
-                        return env.BUILD_NUMBER == 4
+                        return env.BUILD_NUMBER == 11
                     }
                     environment ignoreCase: true, name: 'branch', value: 'dev'
                 }
@@ -24,6 +24,11 @@ pipeline{
                 sh "sh ./scripts/run.sh"
                 sh "echo 'added auto trigger'"
             }
+        }
+    }
+    post {
+        always {
+            sh "docker stop expressapp"
         }
     }
 }
