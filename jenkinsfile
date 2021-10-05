@@ -3,12 +3,6 @@ pipeline{
     stages{
         stage("Build"){ 
             when {
-                allOf {
-                    expression {
-                        return env.BUILD_NUMBER == 11
-                    }
-                    environment ignoreCase: true, name: 'branch', value: 'dev'
-                }
                 anyOf {
                     branch "master";
                     branch "dev"
@@ -21,6 +15,7 @@ pipeline{
         }
         stage("Deliver"){
             steps{
+                sh "echo ${env.BUILD_NUMBER}"
                 sh "sh ./scripts/run.sh"
                 sh "echo 'added auto trigger'"
             }
